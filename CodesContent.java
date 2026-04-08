@@ -15,25 +15,7 @@ import net.neoforged.bus.api.EventPriority;
 
 
 @EventBusSubscriber
-public class CustomBar {
-	public CustomBar() {
-	}
-
-	@SubscribeEvent
-	public static void init(FMLCommonSetupEvent event) {
-		new CustomBar();
-	}
-
-	@SubscribeEvent
-	public static void clientLoad(FMLClientSetupEvent event) {
-	}
-
-	@EventBusSubscriber
-	private static class CustomBarForgeBusEvents {
-		@SubscribeEvent
-		public static void serverLoad(ServerStartingEvent event) {
-		}
-	}
+public class YourModElementName {
 	private static final ResourceLocation YOUR_BAR_NAME =
         ResourceLocation.fromNamespaceAndPath("mod id", "textures/yourfile path/your_bar_name.png");
 
