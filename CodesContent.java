@@ -1,18 +1,14 @@
-package net.YourRootName.YourCustomElementName;
+package ModRootName;
 
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.EventPriority;
-
+import net.minecraft.client.renderer.RenderPipelines;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 @EventBusSubscriber
 public class YourModElementName {
@@ -21,43 +17,37 @@ public class YourModElementName {
 
     //Optional
     @SubscribeEvent(priority = EventPriority.NORMAL)
-    
+
 	public static void eventHandler(RenderGuiEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
-
         if (player == null) return;
-
         GuiGraphics gui = event.getGuiGraphics();
 
         // In this case we will use MCreator's variable system
-        float value = (float)player.getData(net.drakona.*YourModID_All_lowercase*.network.*YourModID*ModVariables.PLAYER_VARIABLES).Value;
-        float maxValue = (float)player.getData(net.*YourName*.*YourModID_All_lowercase*.network.*YourModID*ModVariables.PLAYER_VARIABLES).MaxValue;
 
+        float value = (float)player.getData(net.drakona.*YourModID_All_lowercase*.network.*YourModID*ModVariables.PLAYER_VARIABLES).Value;
+        // The *YourModID* can be found in workspace file explorer it'll be *YourModName*Mod.java
+        float maxValue = (float)player.getData(net.*YourName*.*YourModID_All_lowercase*.network.*YourModID*ModVariables.PLAYER_VARIABLES).MaxValue;
+        
         // Offsets/Positions
         int w = event.getGuiGraphics().guiWidth();
 		int h = event.getGuiGraphics().guiHeight();
-
+		
+		// X value
         int x = 1;
+        // Y value
         int y = h - 10;
 
-        // Render Bar1
-        gui.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
-		    BACK_BAR,
-		    x, y,
-		    0, 0,
-		    *TextureWidth*, *TextureHeight*,
-		    *TextureWidth*, *TextureHeight*
-		);
-		
-		float percentBar1 = value <= 0 ? 0 : (value / maxValue);
-		int filledBar1 = percent >= 1 ? *TextureWidth* : (int)(percentBar1 * *TextureWidth*) ;
-		
+		float percentBar = value <= 0 ? 0 : (value / maxValue);
+		int filledBar = percent >= 1 ? *TextureWidth* : (int)(percentBar1 * *TextureWidth*) ;
+
+		// Render bar
 		gui.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
 		    *YOUR_BAR_NAME*,
 		    x, y,
 		    0, 0,
-		    filledBar1, *TextureHeight*,
+		    filledBar, *TextureHeight*,
 		    *TextureWidth*, *TextureHeight*
 		);	
     }
