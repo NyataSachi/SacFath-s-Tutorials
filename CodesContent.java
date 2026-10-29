@@ -40,7 +40,7 @@ public class YourModElementName {
         int y = h - 10;
 
 		float percentBar = value <= 0 ? 0 : (value / maxValue);
-		int filledBar = percent >= 1 ? *TextureWidth* : (int)(percentBar1 * *TextureWidth*) ;
+		int filledBar = percentBar >= 1 ? *TextureWidth* : (int)(percentBar * *TextureWidth*) ;
 
 		// Render bar
 		gui.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED,
